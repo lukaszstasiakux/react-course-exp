@@ -8,7 +8,7 @@ const CSSExtract =new ExtractTextPlugin('styles.css')
   return {
     entry: './src/app.js',
     output: {
-      path: path.join(__dirname, 'public'),
+      path: path.join(__dirname, 'public', 'dist'),
       filename: 'bundle.js'
     },
     module: {
@@ -43,7 +43,8 @@ const CSSExtract =new ExtractTextPlugin('styles.css')
     devServer: {
       contentBase: path.join(__dirname, 'public'),
       historyApiFallback: true,
-      host: "127.0.0.1"
+      host: "127.0.0.1",
+      publicPath: '/dist/'
     }
   }
 

@@ -1,6 +1,7 @@
 import uuid from 'uuid';
 import database from '../firebase/firebase';
 
+//Add
 export const addExpense = (expense) => ({
   type: 'ADD_EXPENSE',
   expense
@@ -27,6 +28,7 @@ export const startAddExpense = (expenseData = {}) => {
 };
 
 
+//Remove
 export const removeExpense = ({id} = {} ) => ({
   type: 'REMOVE_EXPENSE',
   id
@@ -40,12 +42,24 @@ export const startRemoveExpense = ({id} = {} ) => {
   }
 }
 
+
+//Edit
 export const editExpense = (id, updates) => ({
   type: 'EDIT_EXPENSE',
   id,
   updates
 });
 
+export const startEdutExpense = (id, updates) => {
+  return (dispatch) => {
+    return database.ref(`expenses/${id}`).update(updates).then(() => {
+      dispatch(editExpense(id,updates));
+    })
+  }
+}
+
+
+//Fetch data
 export const setExpenses = (expenses) => ({
   type: 'SET_EXPENSES',
   expenses
